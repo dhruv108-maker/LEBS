@@ -1,0 +1,173 @@
+/* General styling for body */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    background-color: #f3f3f3;
+}
+.container{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10%;
+}
+
+/* Form container styling */
+.form-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    max-width: 460px;
+    width: 100%;
+    animation: fadeIn 1s ease-in-out;
+    margin-top: 9%;
+}
+
+/* Form title */
+.lab-form h2 {
+    text-align: center;
+    color: #4e4e4e;
+    margin-bottom: 20px;
+    font-weight: bolder;
+    animation: slideDown 1s ease-in-out;
+}
+
+/* Input group styling */
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+/* Input focus state */
+.input-group input:focus, .input-group select:focus {
+    border-color: #9966fe;
+    outline: none;
+    box-shadow: 0 0 8px rgba(102, 162, 254, 0.5);
+}
+
+/* Time selection */
+.time-selection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.time-selection select {
+    width: 30%;
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+/* Button styling */
+.submit-btn {
+    position: relative;
+    overflow: hidden; /* Make sure the ripple stays within the button bounds */
+    width: 100%;
+    padding: 12px;
+    background-color: #ae6ae3;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Ripple effect */
+.submit-btn .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.6);
+    transform: scale(0);
+    animation: ripple-effect 0.7s linear ;
+    pointer-events: none;
+}
+
+/* Keyframes for the ripple animation */
+@keyframes ripple-effect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Button hover effect */
+.submit-btn:hover {
+    background-color: #ae6ae3;
+}
+
+
+
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design */
+@media only screen and (min-width: 300px) and (max-width: 767px) {
+    .container{
+        padding-bottom: 40%;
+    }
+    .form-container {
+        padding: 20px;
+    }
+    
+    .submit-btn {
+        font-size: 16px;
+    }
+    
+    .time-selection select {
+        width: 28%;
+    }
+}
+
+
+/* In navbar.css or <style> section */
+#navbar {
+    z-index: 1000; /* Set a high z-index for the navbar */
+    position: relative; /* Required to use z-index */
+}
+
+.form-container {
+    z-index: 1; /* Set a lower z-index for the form */
+    position: relative; /* Required to use z-index */
+}

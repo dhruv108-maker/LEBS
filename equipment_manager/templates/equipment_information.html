@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Information | LEBS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/equipment_info.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/equipment_card.css') }}">
+    <script src="{{ url_for('static', filename='js/equipment_info.js') }}"></script>
+</head>
+<body>
+        {% block navbar %}
+        {% include 'components/navbar.html' %}
+        {% endblock %}
+<main>
+    <div id="title">
+        <h1>Equipment information</h1>
+    </div>
+    <div id="equipment-card-container" class="equipment-card-container">
+        {% block equipment_card %}
+        {% include 'components/equipment-card.html' with context %}
+        {% endblock %}
+    </div>
+    <div id="input-form-container" class="input_form" style="display: none;">   
+        {% block input_form %}
+        {% include 'components/input_form.html' %}
+        {% endblock %}
+    </div>
+</main>
+    {% block footer %}
+    {% include 'components/footer.html' %}
+    {% endblock %}
+</body>
+</html>

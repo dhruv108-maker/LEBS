@@ -1,0 +1,110 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/request_block.css') }}">
+{% for request in requests_data %}
+<div class="request-container" onclick="toggleActive(this)">
+    <div class="request-information">
+        <div id="section-1">
+            <p class="request-info"><strong>Request ID:</strong> {{ request.RequestID }}</p>
+            <p class="request-info"><strong>Equipment Required:</strong> {{ request.equipment }}</p>
+        </div>
+        <div id="section-2">
+            <p class="request-info"><strong>Sample Required:</strong> {{ request.sample }}</p>
+            <p class="request-info"><strong>Expected date for Report:</strong> {{ request.sample_day }}</p>
+            <p class="request-info"><strong>Email:</strong> {{ request.user_email }}</p>
+        </div>
+    </div>
+
+    {% if role_id == '003' %}
+    <div class="manager_toggle">
+        <div id="accept">
+            <button onclick="acceptRequest('{{ request.RequestID }}', '{{ request.equipment }}', '{{ request.sample }}', '{{ request.sample_day }}', '{{ request.user_email }}')">Accept</button>
+        </div>
+        <div id="reject">
+            <button onclick="rejectRequest('{{ request.RequestID }}')">Reject</button>
+        </div>
+    </div>
+    <div class="disclaimer">
+        <p>*Once request Accepted can't be rejected under any Circumstances*</p>
+    </div>
+    {% else %}
+        {% if request.request_status == 'accepted' %}
+            <div class="analyst_information">
+                <h6>Accepted By:</h6>
+                <p>{{ request.analyst_name }}</p>
+                <p>{{ request.analyst_email }}</p>
+                <p>{{ request.analyst_phone }}</p>
+            </div>
+        {% endif %}
+    {% endif %}
+</div>
+{% endfor %}
+
+<script>
+    function toggleActive(container) {
+        // Check if the container already has the 'active' class
+        if (container.classList.contains('active')) {
+            // If it has the class, remove it (collapse the container)
+            container.classList.remove('active');
+        } else {
+            // If it doesn't have the class, add it (expand the container)
+            container.classList.add('active');
+        }
+    }
+
+    function acceptRequest(requestId, equipment, sample, sampleDay, userEmail) {
+        const requestData = {
+            request_id: requestId,
+            equipment: equipment,
+            sample: sample,
+            sample_day: sampleDay,
+            user_email: userEmail
+        };
+
+        fetch('/accept_request', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert(data.message);  // Notify success
+                // Optionally refresh or update the UI here
+            } else {
+                alert(`Error: ${data.message}`);  // Notify error
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while accepting the request.');
+        });
+    }
+
+    function rejectRequest(requestId) {
+        // Add the logic to handle rejection, such as showing a confirmation dialog
+        if (confirm('Are you sure you want to reject this request?')) {
+            // Send the request to reject the request
+            fetch('/reject_request', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ request_id: requestId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert(data.message);  // Notify success
+                    // Optionally refresh or update the UI here
+                } else {
+                    alert(`Error: ${data.message}`);  // Notify error
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while rejecting the request.');
+            });
+        }
+    }
+</script>

@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard_home.css') }}">
+<div class="info-container">
+    <div class="information" id="information-1">
+       <h4 class="heading">Requests</h4>
+       {{latest_request['request_id']}}
+       {{latest_request['request_status']}}
+       {%if latest_request['request_status'] == 'accepted' %}
+            {{latest_request['manager_name']}}
+        {%endif%}
+    </div>
+    <div class="information" id="information-2">
+        <h4 class="heading">Experiments</h4>
+            {% block stats %}
+            {% include 'components/stats.html' %}
+            {% endblock %}
+    </div>
+    <div class="information" id="information-2">
+        <h4 class="heading">Information 3</h4>
+    </div>
+</div>
+

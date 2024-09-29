@@ -1,0 +1,81 @@
+{% with messages = get_flashed_messages(with_categories=True) %}
+{% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show flash-message" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endwith %}
+
+<style>
+    .flash-messages {
+        padding: 10px;
+        margin-top: 5%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        z-index: 3;
+    }
+
+    .flash-message {
+        transition: opacity 0.7s cubic-bezier(0.4, 0.0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0.0, 0.2, 1);  /* Smoother slide-up and fade-out */
+    }
+    
+    .flash-message.hidden {
+        opacity: 0;
+        transform: translateY(-30px); /* Moves the message upwards smoothly */
+        display: none;
+    }
+
+    .custom-flash {
+        width: 90%; /* Makes it responsive, adapting to smaller screens */
+        max-width: 600px; /* Ensures the alert doesn't get too wide on larger screens */
+        margin: 10px auto;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
+        border-radius: 6px;
+    }
+
+    .flash-message-text {
+        font-size: 16px;
+        color: #333; /* Ensures the text is visible on different alert backgrounds */
+    }
+
+    .flash-message {
+        transition: opacity 0.5s ease-in-out;  /* Smooth fade-out */
+    }
+
+    @media screen and (max-width: 576px) {
+        .custom-flash {
+            width: 95%; /* Makes it more compact for smaller screens */
+            font-size: 14px; /* Reduces font size for mobile screens */
+        }
+
+        .flash-message-text {
+            font-size: 14px;
+        }
+    }
+</style>
+
+<script>
+// Hide flash messages after 3 seconds with a smooth slide-up animation
+setTimeout(function() {
+    var flashMessages = document.querySelectorAll('.flash-message');
+    flashMessages.forEach(function(message) {
+        message.style.transform = 'translateY(-30px)';  // Slide up smoothly
+        message.style.opacity = 0;  // Fade out smoothly
+        setTimeout(function() {
+            message.classList.add('hidden'); // Hide after animation ends
+        }, 700); // Adjust timeout to match the CSS animation duration (0.7s)
+    });
+}, 3000); // 3000ms = 3 seconds
+</script>

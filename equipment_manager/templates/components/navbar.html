@@ -1,0 +1,105 @@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
+  <a class="navbar-brand" id="logo" href="#"><img src="{{ url_for('static', filename='images/dp.jpeg') }}" width="100%" alt="#"></a>
+  <button style="width:13%;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" ></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav" id="navBar">
+        <li class="nav-item active">
+            <a class="nav-link" href="#" onclick="openHomePage()">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" onclick="openEquipmentPage()">Equipments</a>
+        </li>
+        {% if request.endpoint == 'equipment_information' and session['role_id'] == '003' %}
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="openInputPage()">Manager's Panel</a>
+            </li>
+        {% endif %}
+        <li class="nav-item">
+            <a class="nav-link" href="#" onclick="openRequetsPgae()">Requets</a>
+        </li>
+    </ul>
+</div>
+</nav>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+      var prevScroll = 0;
+      var $window = $(window);
+      var $nav = $('#navbar');
+      
+      $window.on('scroll', function(){
+          var currentScroll = $window.scrollTop();
+          
+          if (currentScroll > prevScroll) {
+              // Scrolling Down
+              $nav.addClass('hidden');
+          } else {
+              // Scrolling Up
+              $nav.removeClass('hidden');
+          }
+          
+          prevScroll = currentScroll;
+      });
+  });
+  
+function openHomePage(){
+    window.open('/home', '_blank')
+}
+
+function openLoginPgae(){
+    window.open('/', '_blank')
+}
+
+function openRequetsPgae(){
+    window.open('/requests', '_blank')
+}
+
+function openInputPage() {
+    const equipmentCardContainer = document.getElementById('equipment-card-container');
+    const inputFormContainer = document.getElementById('input-form-container');
+
+    // Hide the equipment card and show the input form with smooth transitions
+    equipmentCardContainer.style.display = 'none';
+    inputFormContainer.style.display = 'flex';
+    inputFormContainer.style.justifyContent = 'center';
+    inputFormContainer.style.width = '100%';
+    
+    // Optional: Add smooth transitions by changing opacity
+    inputFormContainer.style.opacity = 0;
+    setTimeout(() => {
+        inputFormContainer.style.transition = 'opacity 0.5s ease';
+        inputFormContainer.style.opacity = 1;
+    }, 10);  // Delay for ensuring the transition takes effect
+}
+
+function openEquipmentPage(){
+    window.open('/equipment_information', '_blank')
+}
+
+window.onload = function() {
+    // Check the current URL
+    var currentUrl = window.location.href;
+
+    // If the URL matches http://192.168.29.113:5000/
+    if (currentUrl === "http://192.168.29.113:5000/") {
+      // Hide the navbar
+      document.getElementById("navBar").style.display = "none";
+    }
+  };
+
+</script>
+
+  
+  
+  

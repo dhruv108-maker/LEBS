@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request | LEBS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/requests_page.css') }}">
+</head>
+<body>
+    {% block flaskMessage %}
+    {% include 'components/flash.html' %}
+    {% endblock %}
+    {% block navbar %}
+    {% include 'components/navbar.html' %}
+    {% endblock %}
+    <main>
+        <div class="requests-container-main">
+            {% block requestBlock %}
+            {% include 'components/request_block.html' %}
+            {% endblock %}
+        </div>
+    </main>
+
+</body>
+</html>

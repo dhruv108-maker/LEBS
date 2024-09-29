@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/equipment_card.css') }}">
+
+{% for data in equipment_data %}
+    <div class="equipment-card">
+        <div class="equipment-info">
+            <h2 class="equipment-title">{{ data.equipment_name }}</h2>
+            <div class="eq-info-palet">
+                <div id="equipment-image-display">
+                    <!-- Fetch the image name dynamically from the database -->
+                    <img src="{{ url_for('static', filename='uploads/' + data.equipment_image) }}" alt="{{ data.equipment_name }}" style="width:100%; height:auto;">
+                </div>
+                <section class="features-container">
+                    <h5 class="key-features">Key Features</h5>
+                    <ul>
+                        {% for feature in data.features %}
+                            <li class="features">{{ feature }}</li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            </div>
+            <section class="manager-details">
+                <h5 class="manager-title">
+                    <div id="manager-dp"></div>{{ data.manager.name }}
+                </h5>
+                <p>{{ data.manager.contact_number }}</p>
+                <p>{{ data.manager.email }}</p>
+                <p><b>{{ data.description }}</b></p>
+
+            </section>
+        </div>
+    </div>
+{% endfor %}

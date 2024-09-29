@@ -1,0 +1,76 @@
+
+
+    /* General container styling */
+    .booking {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px;
+        background-color: #ededed;
+        padding: 5%;
+    }
+
+    .section-title-2{
+        width: 100%;
+        text-align: center;
+        color: rgb(64, 64, 64);
+        font-weight: bolder;
+    }
+
+    /* Button styling */
+    .booking-btn button {
+        padding: 15px 30px;
+        background-color: #ff6b6b; /* Beautiful vibrant red color */
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Add a shadow for a 3D effect */
+        text-transform: uppercase; /* Make text all uppercase */
+        letter-spacing: 1px; /* Slight spacing for a modern look */
+    }
+
+    /* Button hover effect */
+    .booking-btn button:hover {
+        background-color: #e05252; /* Darken the button on hover */
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2); /* Larger shadow on hover */
+        transform: translateY(-3px); /* Raise the button on hover */
+    }
+
+    /* Button active/pressed state */
+    .booking-btn button:active {
+        transform: translateY(1px); /* Simulate a press effect */
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1); /* Reduce the shadow */
+    }
+
+    /* Responsive design for tablets */
+    @media (max-width: 768px) {
+        .booking-btn button {
+            padding: 12px 25px;
+            font-size: 16px;
+            width: 80%; /* Expand the button width for better touch area */
+        }
+    }
+
+    /* Responsive design for mobile phones */
+    @media (max-width: 480px) {
+        .booking-btn button {
+            padding: 10px 20px;
+            font-size: 14px;
+            width: 90%;
+        }
+
+        .booking {
+            margin-top: -25%;
+            background-color: #3a5167;
+            margin: 0;
+            height: 200px;
+        }
+
+        .section-title-2{
+            display: none;
+        }
+    }
