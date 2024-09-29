@@ -5,8 +5,8 @@ def get_db_connection():
     return pymysql.connect(
         host='localhost',
         user='root',  # Your MySQL username
-        password='dhruv_100',  # Your MySQL password
-        database='laboratory_system',
+        password='PASSWORD',  # Your MySQL password
+        database='DATA_BASE_NAME',
         charset='utf8mb4',
         cursorclass=pymysql.cursors.DictCursor
         
